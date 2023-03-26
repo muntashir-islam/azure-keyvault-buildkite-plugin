@@ -13,7 +13,7 @@ AZURE_KEYVAULT_SECRETS="${BUILDKITE_PLUGIN_AZURE_KEYVAULT_SECRETS}"
 for secret_name in $(echo "${AZURE_KEYVAULT_SECRETS}" | tr ',' '\n'); do
   # Use the Azure CLI to get the secret value
   secret_value=$(az keyvault secret show --vault-name "${AZURE_KEYVAULT_URL}" --name "${secret_name}" --query 'value' -o tsv)
-
+  echo $secret_value
   # Set the secret value as an environment variable in the Buildkite pipeline
   export "${secret_name}"="${secret_value}"
 done
