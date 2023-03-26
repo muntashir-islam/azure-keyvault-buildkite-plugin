@@ -2,7 +2,7 @@
 
 set -euo pipefail
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-az login --service-principal -u "${AZURE_CLIENT_ID}" -p "${AZURE_CLIENT_SECRET}" --tenant "${AZURE_TENANT_ID}"
+az login --service-principal -u "${AZURE_CLIENT_IDS}" -p "${AZURE_CLIENT_SECRETS}" --tenant "${AZURE_TENANT_IDS}"
 # Get the Azure Key Vault URL from the plugin configuration
 AZURE_KEYVAULT_URL="${BUILDKITE_PLUGIN_AZURE_KEYVAULT_URL}"
 
