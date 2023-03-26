@@ -1,5 +1,8 @@
-name: azure-keyvault-secrets
+---
+name: Azure Key-vault Secrets
 description: Retrieve secrets from Azure Key Vault using keys
-version: "1.0.0"
+version: "1.0.5"
 author: Muntashir Islam <muntashir@medstack.co>
 license: MIT
+requirements:
+  - az
