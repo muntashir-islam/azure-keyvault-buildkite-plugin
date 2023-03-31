@@ -10,5 +10,5 @@ ACCESS_TOKEN=$(curl -X POST -d "grant_type=client_credentials&client_id=$AZURE_C
 IFS=',' read -ra SECRETS <<< "$AZURE_KEY_VAULT_SECRETS"
 for SECRET_NAME in "${SECRETS[@]}"; do
   SECRET_VALUE=$(curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://$AZURE_KEY_VAULT_NAME.vault.azure.net/secrets/$SECRET_NAME?api-version=2016-10-01" | jq -r .value)
-  echo "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
+  export "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
 done
