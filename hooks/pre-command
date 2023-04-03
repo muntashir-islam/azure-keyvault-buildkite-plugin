@@ -7,9 +7,9 @@ set -eu
 ACCESS_TOKEN=$(curl -X POST -d "grant_type=client_credentials&client_id=$AZURE_CLIENT_IDS&client_secret=$AZURE_CLIENT_SECRETS&resource=https://vault.azure.net" "https://login.microsoftonline.com/$AZURE_TENANT_IDS/oauth2/token" | jq -r .access_token)
 
 # Loop through the list of secrets and retrieve each one
-for SECRET_NAME in $(echo "${AZURE_KEY_VAULT_SECRETS}" | tr ',' '\n'); do
+for SECRET_NAME in $(echo "Muntashir,work" | tr ',' '\n'); do
   SECRET_VALUE=$(curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://$AZURE_KEY_VAULT_NAME.vault.azure.net/secrets/$SECRET_NAME?api-version=2016-10-01" | jq -r .value)
-  export "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
-  export "$SECRET_NAME=$SECRET_VALUE" 
+  #export "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
+  echo "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
 done
 
