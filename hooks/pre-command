@@ -13,4 +13,4 @@ for SECRET_NAME in $(echo "$AZURE_KEY_VAULT_SECRETS" | tr ',' '\n'); do
   export "${SECRET_NAME}=${SECRET_VALUE}" >> "$BUILDKITE_ENV_FILE"
   echo export "${SECRET_NAME}=${SECRET_VALUE}" >> shared_vars.sh
 done
-buildkite-agent artifact upload 
+
