@@ -11,6 +11,6 @@ for SECRET_NAME in $(echo "$AZURE_KEY_VAULT_SECRETS" | tr ',' '\n'); do
   SECRET_VALUE=$(curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://$AZURE_KEY_VAULT_NAME.vault.azure.net/secrets/$SECRET_NAME?api-version=2016-10-01" | jq -r .value)
   #export "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
   export "${SECRET_NAME}=${SECRET_VALUE}" >> "$BUILDKITE_ENV_FILE"
-  echo export "${SECRET_NAME}=${SECRET_VALUE}" > shared_vars.sh
+  echo export "${SECRET_NAME}=${SECRET_VALUE}" >> shared_vars.sh
 done
-
+buildkite-agent artifact upload 
