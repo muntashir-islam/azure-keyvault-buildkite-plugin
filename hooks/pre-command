@@ -1,3 +1,6 @@
+
+ 
+
 #!/usr/bin/env bash
 
 # Exit immediately on errors or undefined variables
@@ -9,8 +12,7 @@ ACCESS_TOKEN=$(curl -X POST -d "grant_type=client_credentials&client_id=$AZURE_C
 # Loop through the list of secrets and retrieve each one
 for SECRET_NAME in $(echo "$AZURE_KEY_VAULT_SECRETS" | tr ',' '\n'); do
   SECRET_VALUE=$(curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://$AZURE_KEY_VAULT_NAME.vault.azure.net/secrets/$SECRET_NAME?api-version=2016-10-01" | jq -r .value)
-  #export "$SECRET_NAME=$SECRET_VALUE" >> "$BUILDKITE_ENV_FILE"
-  export "${SECRET_NAME}=${SECRET_VALUE}" >> "$BUILDKITE_ENV_FILE"
+  # export "${SECRET_NAME}=${SECRET_VALUE}" >> "$BUILDKITE_ENV_FILE"
   echo export "${SECRET_NAME}=${SECRET_VALUE}" >> shared_vars.sh
 done
 
